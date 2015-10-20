@@ -1,0 +1,1417 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Gui;
+
+import java.awt.Color;
+import java.awt.Toolkit;
+import java.text.DateFormatSymbols;
+import javax.swing.JOptionPane;
+import pilgrimscrutinizer.DBOperation;
+import pilgrimscrutinizer.Tourtable;
+import pilgrimscrutinizer.customerdetails;
+import pilgrimscrutinizer.tourdetails;
+
+/**
+ *
+ * @author HP
+ */
+public class EditDocCostDetails extends javax.swing.JFrame {
+
+    /**
+     * Creates new form EditDocCostDetails
+     */
+    public EditDocCostDetails() {
+        initComponents();
+        /*Toolkit tk = Toolkit.getDefaultToolkit();
+         int x = (int) tk.getScreenSize().getWidth();
+         int y = (int) tk.getScreenSize().getHeight();
+         this.setSize(x, y);*/
+        tab.setEnabledAt(1, false);
+
+    }
+
+    public void setpassport(customerdetails cd) {
+        System.out.println((cd.getPassportno())+"ssd");
+        if (cd.getPassportno() != null) {
+            cbpassport.setSelected(false);
+            txtpassportno.setText(cd.getPassportno());
+            txtpassissueplace.setText(cd.getPassportissueplace());
+            int pilength=cd.getPassportissuedate().length();
+            int pelength=cd.getPassportexpdate().length();
+            ddyearpi.setSelectedItem(cd.getPassportissuedate().substring(0, 4));
+            ddmonthpi.setSelectedItem(cd.getPassportissuedate().substring(4, (pilength-2)));
+            dddatepi.setSelectedItem(cd.getPassportissuedate().substring((pilength-2)));
+            ddyearpe.setSelectedItem(cd.getPassportexpdate().substring(0, 4));
+            ddmonthpe.setSelectedItem(cd.getPassportexpdate().substring(4, (pelength-2)));
+            dddatepe.setSelectedItem(cd.getPassportexpdate().substring(pelength-2));
+
+        } else {
+            cbpassport.setSelected(true);
+            txtpassportno.setEditable(false);
+            txtpassissueplace.setEditable(false);
+            ddyearpi.setEnabled(false);
+            ddmonthpi.setEnabled(false);
+            ddyearpi.setEnabled(false);
+            dddatepe.setEnabled(false);
+            ddmonthpe.setEnabled(false);
+            ddyearpe.setEnabled(false);
+            
+        }
+    }
+
+    public void setvisa(Tourtable tt) {
+        if (tt.getVisano() != null) {
+            cbvisa.setSelected(false);
+            txtvisano.setText(tt.getVisano());
+            int vilength=tt.getVisaissuedate().length();
+            int velength=tt.getVisaexpdate().length();
+            ddyearvi.setSelectedItem(tt.getVisaissuedate().substring(0, 4));
+            ddmonthvi.setSelectedItem(tt.getVisaissuedate().substring(4, (vilength-2)));
+            dddatevi.setSelectedItem(tt.getVisaissuedate().substring((vilength-2)));
+            ddyearve.setSelectedItem(tt.getVisaexpdate().substring(0, 4));
+            ddmonthve.setSelectedItem(tt.getVisaexpdate().substring(4, (vilength-2)));
+            dddateve.setSelectedItem(tt.getVisaexpdate().substring((vilength-2)));
+
+        } else {
+            cbvisa.setSelected(true);
+            txtvisano.setEditable(false);
+            dddatevi.setEnabled(false);
+            ddmonthvi.setEnabled(false);
+            ddyearvi.setEnabled(false);
+            dddateve.setEnabled(false);
+            ddmonthve.setEnabled(false);
+            ddyearve.setEnabled(false);
+        }
+    }
+
+    public void setinsurance(Tourtable tt) {
+        if (tt.getInsurancepolicyno() != null) {
+            cbinsurance.setSelected(false);
+            txtinsurpolicy.setText(tt.getInsurancepolicyno());
+            txtinsurcmpnyname.setText(tt.getInsurecmpny());
+        } else {
+            cbinsurance.setSelected(true);
+            txtinsurcmpnyname.setEditable(false);
+            txtinsurpolicy.setEditable(false);
+            //txticost.setEditable(true);
+            cbicost.setEnabled(false);
+        }
+    }
+
+    public void setcusdetails(customerdetails cd) {
+        txtname.setText(cd.getName());
+        txtnic.setText(cd.getNicno());
+        txtcustid.setText(Integer.toString(cd.getCustid()));
+        txtsurname.setText(cd.getSurname());
+        txtdesignation.setText(cd.getCivilstatus());
+    }
+
+    public void settid(int tid) {
+        txttourid.setText(Integer.toString(tid));
+    }
+
+    public void setcostdetails(tourdetails td) {
+        txtaircost.setText(Integer.toString(td.getAirticket()));
+        txthospitalitycost.setText(Integer.toString(td.getHospitality()));
+        txttransportcost.setText(Integer.toString(td.getTransport()));
+        txtpcost.setText(Integer.toString(td.getPassport()));
+        txtvcost.setText(Integer.toString(td.getVisa()));
+        txticost.setText(Integer.toString(td.getInsurance()));
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        txtnic = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        txtname = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtsurname = new javax.swing.JTextField();
+        txtdesignation = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtcustid = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txttourid = new javax.swing.JTextField();
+        tab = new javax.swing.JTabbedPane();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel57 = new javax.swing.JLabel();
+        ddyearpi = new javax.swing.JComboBox();
+        jLabel58 = new javax.swing.JLabel();
+        ddmonthpi = new javax.swing.JComboBox();
+        jLabel59 = new javax.swing.JLabel();
+        dddatepi = new javax.swing.JComboBox();
+        ddyearpe = new javax.swing.JComboBox();
+        jLabel60 = new javax.swing.JLabel();
+        jLabel61 = new javax.swing.JLabel();
+        ddmonthpe = new javax.swing.JComboBox();
+        jLabel62 = new javax.swing.JLabel();
+        dddatepe = new javax.swing.JComboBox();
+        cbpassport = new javax.swing.JCheckBox();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtpassportno = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtpassissueplace = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cbpcost = new javax.swing.JCheckBox();
+        txtpcost = new javax.swing.JTextField();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel38 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        ddyearvi = new javax.swing.JComboBox();
+        jLabel63 = new javax.swing.JLabel();
+        dddatevi = new javax.swing.JComboBox();
+        jLabel64 = new javax.swing.JLabel();
+        ddmonthvi = new javax.swing.JComboBox();
+        jLabel65 = new javax.swing.JLabel();
+        dddateve = new javax.swing.JComboBox();
+        jLabel66 = new javax.swing.JLabel();
+        ddmonthve = new javax.swing.JComboBox();
+        jLabel67 = new javax.swing.JLabel();
+        ddyearve = new javax.swing.JComboBox();
+        jLabel68 = new javax.swing.JLabel();
+        txtvisano = new javax.swing.JTextField();
+        jLabel36 = new javax.swing.JLabel();
+        cbvcost = new javax.swing.JCheckBox();
+        txtvcost = new javax.swing.JTextField();
+        cbvisa = new javax.swing.JCheckBox();
+        jLabel35 = new javax.swing.JLabel();
+        jPanel9 = new javax.swing.JPanel();
+        cbinsurance = new javax.swing.JCheckBox();
+        jLabel39 = new javax.swing.JLabel();
+        jLabel40 = new javax.swing.JLabel();
+        txtinsurcmpnyname = new javax.swing.JTextField();
+        txtinsurpolicy = new javax.swing.JTextField();
+        jLabel41 = new javax.swing.JLabel();
+        txticost = new javax.swing.JTextField();
+        cbicost = new javax.swing.JCheckBox();
+        btncancel = new javax.swing.JButton();
+        btnnext = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        txtaircost = new javax.swing.JTextField();
+        txttransportcost = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        txthospitalitycost = new javax.swing.JTextField();
+        cbair = new javax.swing.JCheckBox();
+        cbhospitality = new javax.swing.JCheckBox();
+        cbtransport = new javax.swing.JCheckBox();
+        btnsubmit = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        btnback = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(204, 204, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        txtnic.setEditable(false);
+        txtnic.setBackground(new java.awt.Color(255, 255, 255));
+        txtnic.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtnic.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        jLabel1.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel1.setText("NIC");
+
+        txtname.setEditable(false);
+        txtname.setBackground(new java.awt.Color(255, 255, 255));
+        txtname.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtname.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        jLabel2.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel2.setText("Full Name");
+
+        jLabel3.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel3.setText("Surname");
+
+        txtsurname.setEditable(false);
+        txtsurname.setBackground(new java.awt.Color(255, 255, 255));
+        txtsurname.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtsurname.setPreferredSize(new java.awt.Dimension(59, 30));
+        txtsurname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtsurnameActionPerformed(evt);
+            }
+        });
+
+        txtdesignation.setEditable(false);
+        txtdesignation.setBackground(new java.awt.Color(255, 255, 255));
+        txtdesignation.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtdesignation.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        jLabel32.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel32.setText("Customer Id");
+
+        jLabel4.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel4.setText("Designation");
+
+        txtcustid.setEditable(false);
+        txtcustid.setBackground(new java.awt.Color(255, 255, 255));
+        txtcustid.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtcustid.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        jLabel5.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel5.setText("Tour Id");
+
+        txttourid.setEditable(false);
+        txttourid.setBackground(new java.awt.Color(255, 255, 255));
+        txttourid.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txttourid.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
+                    .addComponent(txtnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtsurname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(150, 150, 150)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtdesignation, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtcustid, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txttourid, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(178, 178, 178))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtnic, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcustid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtdesignation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txttourid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtsurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18))
+        );
+
+        tab.setBackground(new java.awt.Color(255, 255, 255));
+        tab.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        jLabel57.setText("Year :");
+
+        ddyearpi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035" }));
+        ddyearpi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddyearpiActionPerformed(evt);
+            }
+        });
+
+        jLabel58.setText("Month :");
+
+        ddmonthpi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" }));
+
+        jLabel59.setText("Date :");
+
+        dddatepi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        ddyearpe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035" }));
+        ddyearpe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddyearpeActionPerformed(evt);
+            }
+        });
+
+        jLabel60.setText("Year :");
+
+        jLabel61.setText("Month :");
+
+        ddmonthpe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" }));
+
+        jLabel62.setText("Date :");
+
+        dddatepe.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        cbpassport.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbpassport.setForeground(new java.awt.Color(255, 0, 0));
+        cbpassport.setText("Pending");
+        cbpassport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbpassportActionPerformed(evt);
+            }
+        });
+
+        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel34.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel34.setText("Passport Details");
+
+        jLabel8.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel8.setText("Passport No");
+
+        txtpassportno.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtpassportno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel11.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel11.setText("Place Of Issue");
+
+        txtpassissueplace.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtpassissueplace.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel12.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel12.setText("Date Of Expiry");
+
+        jLabel9.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel9.setText("Date Of Issue");
+
+        cbpcost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbpcost.setForeground(new java.awt.Color(204, 0, 0));
+        cbpcost.setText("Add Cost");
+        cbpcost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbpcostActionPerformed(evt);
+            }
+        });
+
+        txtpcost.setEditable(false);
+        txtpcost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        txtpcost.setForeground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel12)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                                .addComponent(jLabel60)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ddyearpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel61)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ddmonthpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel34)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cbpassport, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel62)
+                        .addGap(6, 6, 6)
+                        .addComponent(dddatepe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel57)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ddyearpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel58)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ddmonthpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel59)
+                                .addGap(6, 6, 6)
+                                .addComponent(dddatepi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(73, 73, 73)
+                                        .addComponent(txtpassportno, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel11)
+                                        .addGap(60, 60, 60)
+                                        .addComponent(txtpassissueplace, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbpcost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtpcost))
+                .addGap(16, 16, 16))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbpassport)
+                    .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtpcost, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel8))
+                            .addComponent(txtpassportno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel57)
+                            .addComponent(ddyearpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel58)
+                            .addComponent(ddmonthpi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel59)
+                            .addComponent(dddatepi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(cbpcost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel11))
+                            .addComponent(txtpassissueplace, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel60)
+                    .addComponent(ddyearpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel61)
+                    .addComponent(ddmonthpe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel62)
+                    .addComponent(dddatepe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12))
+                .addGap(13, 13, 13))
+        );
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        jLabel38.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel38.setText("Expire Date");
+
+        jLabel37.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel37.setText("Issue Date");
+
+        ddyearvi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035" }));
+        ddyearvi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddyearviActionPerformed(evt);
+            }
+        });
+
+        jLabel63.setText("Year :");
+
+        dddatevi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        jLabel64.setText("Month :");
+
+        ddmonthvi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" }));
+
+        jLabel65.setText("Date :");
+
+        dddateve.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        jLabel66.setText("Date :");
+
+        ddmonthve.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "January", "February", "March", "April", "June", "July", "August", "September", "October", "November", "December" }));
+
+        jLabel67.setText("Month :");
+
+        ddyearve.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030", "2031", "2032", "2033", "2034", "2035" }));
+        ddyearve.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ddyearveActionPerformed(evt);
+            }
+        });
+
+        jLabel68.setText("Year :");
+
+        txtvisano.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtvisano.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel36.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel36.setText("Visa No");
+
+        cbvcost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbvcost.setForeground(new java.awt.Color(204, 0, 0));
+        cbvcost.setText("Add Cost");
+        cbvcost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbvcostActionPerformed(evt);
+            }
+        });
+
+        txtvcost.setEditable(false);
+        txtvcost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        txtvcost.setForeground(new java.awt.Color(255, 51, 51));
+
+        cbvisa.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbvisa.setForeground(new java.awt.Color(255, 0, 0));
+        cbvisa.setText("Pending");
+        cbvisa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbvisaActionPerformed(evt);
+            }
+        });
+
+        jLabel35.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel35.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel35.setText("Visa Details");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(4, 4, 4)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel36)
+                        .addGap(109, 109, 109)
+                        .addComponent(txtvisano, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel38)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel68)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ddyearve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel67)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ddmonthve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel66)
+                            .addGap(6, 6, 6)
+                            .addComponent(dddateve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel8Layout.createSequentialGroup()
+                            .addComponent(jLabel37)
+                            .addGap(53, 53, 53)
+                            .addComponent(jLabel63)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ddyearvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel64)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(ddmonthvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jLabel65)
+                            .addGap(6, 6, 6)
+                            .addComponent(dddatevi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtvcost, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbvcost, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel35)
+                .addGap(115, 115, 115)
+                .addComponent(cbvisa, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbvisa)
+                    .addComponent(jLabel35, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtvisano, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtvcost, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel36))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel37, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel63)
+                        .addComponent(ddyearvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel64)
+                        .addComponent(ddmonthvi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel65)
+                        .addComponent(dddatevi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbvcost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel68)
+                        .addComponent(ddyearve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel67)
+                        .addComponent(ddmonthve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel66)
+                        .addComponent(dddateve, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel38))
+                .addGap(19, 19, 19))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+
+        cbinsurance.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbinsurance.setForeground(new java.awt.Color(255, 0, 0));
+        cbinsurance.setText("Pending");
+        cbinsurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbinsuranceActionPerformed(evt);
+            }
+        });
+
+        jLabel39.setFont(new java.awt.Font("Verdana", 3, 12)); // NOI18N
+        jLabel39.setText("Insurance Details");
+
+        jLabel40.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel40.setText("Insurance Company");
+
+        txtinsurcmpnyname.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtinsurcmpnyname.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtinsurpolicy.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtinsurpolicy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel41.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel41.setText("Insurance Policy No");
+
+        txticost.setEditable(false);
+        txticost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        txticost.setForeground(new java.awt.Color(255, 51, 51));
+
+        cbicost.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbicost.setForeground(new java.awt.Color(204, 0, 0));
+        cbicost.setText("Add Cost");
+        cbicost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbicostActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel40)
+                            .addComponent(jLabel41)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGap(154, 154, 154)
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtinsurcmpnyname, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtinsurpolicy, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(75, 75, 75)
+                        .addComponent(cbinsurance, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbicost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txticost, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(7, 7, 7)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbinsurance))
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel40))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(txtinsurcmpnyname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(txticost, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtinsurpolicy, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbicost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel9Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel41)))
+                .addContainerGap(24, Short.MAX_VALUE))
+        );
+
+        btncancel.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btncancel.setText("Cancel");
+        btncancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelActionPerformed(evt);
+            }
+        });
+
+        btnnext.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnnext.setText("Next");
+        btnnext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnnextActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(181, 181, 181)
+                        .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnnext, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(212, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btncancel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnnext, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+
+        tab.addTab("Document Details", jPanel5);
+
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel6.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel6.setText("Air ticket cost");
+
+        txtaircost.setEditable(false);
+        txtaircost.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txtaircost.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        txttransportcost.setEditable(false);
+        txttransportcost.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txttransportcost.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        jLabel7.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel7.setText("Transport cost");
+
+        jLabel10.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        jLabel10.setText("Hospitality cost");
+
+        txthospitalitycost.setEditable(false);
+        txthospitalitycost.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
+        txthospitalitycost.setPreferredSize(new java.awt.Dimension(59, 30));
+
+        cbair.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbair.setForeground(new java.awt.Color(204, 0, 0));
+        cbair.setText("Add Cost");
+        cbair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbairActionPerformed(evt);
+            }
+        });
+
+        cbhospitality.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbhospitality.setForeground(new java.awt.Color(204, 0, 0));
+        cbhospitality.setText("Add Cost");
+        cbhospitality.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbhospitalityActionPerformed(evt);
+            }
+        });
+
+        cbtransport.setFont(new java.awt.Font("Verdana", 1, 14)); // NOI18N
+        cbtransport.setForeground(new java.awt.Color(204, 0, 0));
+        cbtransport.setText("Add Cost");
+        cbtransport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbtransportActionPerformed(evt);
+            }
+        });
+
+        btnsubmit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnsubmit.setText("Submit");
+        btnsubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnsubmitActionPerformed(evt);
+            }
+        });
+
+        jButton4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton4.setText("Cancel");
+
+        btnback.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnback.setText("Back");
+        btnback.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnbackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtaircost, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txttransportcost, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txthospitalitycost, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(127, 127, 127)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbhospitality)
+                    .addComponent(cbair)
+                    .addComponent(cbtransport))
+                .addContainerGap(681, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(193, 193, 193))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtaircost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbair, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txttransportcost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbtransport, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txthospitalitycost, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbhospitality, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(89, 89, 89)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnsubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnback, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(133, 133, 133))
+        );
+
+        tab.addTab("Cost Details", jPanel3);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(tab, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void txtsurnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtsurnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtsurnameActionPerformed
+
+    private void btnsubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsubmitActionPerformed
+        // TODO add your handling code here:
+        DBOperation db = new DBOperation();
+        updateaircost();
+        //updatepcost();
+        updateicost();
+        updatehostcost();
+        boolean passprt = db.updatepastportdetails(Integer.parseInt(txtcustid.getText()), csdp);
+        boolean ttble = db.updatetourtable(Integer.parseInt(txttourid.getText()), ttc,Integer.parseInt(txtcustid.getText()));
+        if (passprt && ttble) {
+            JOptionPane.showMessageDialog(this, "Document and cost details updated Successfully..!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Something went wrong, Try Again..!");
+
+        }
+    }//GEN-LAST:event_btnsubmitActionPerformed
+
+    private void cbairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbairActionPerformed
+        // TODO add your handling code here:
+        if (cbair.isSelected()) {
+            txtaircost.setBackground(Color.red);
+        } else {
+            txtaircost.setBackground(Color.WHITE);
+        }
+    }//GEN-LAST:event_cbairActionPerformed
+
+    private void cbtransportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbtransportActionPerformed
+        // TODO add your handling code here:
+        if (cbtransport.isSelected()) {
+            txttransportcost.setBackground(Color.red);
+        } else {
+            txttransportcost.setBackground(Color.WHITE);
+        }
+    }//GEN-LAST:event_cbtransportActionPerformed
+
+    private void cbhospitalityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbhospitalityActionPerformed
+        // TODO add your handling code here:
+        if (cbhospitality.isSelected()) {
+            txthospitalitycost.setBackground(Color.red);
+        } else {
+            txthospitalitycost.setBackground(Color.WHITE);
+        }
+    }//GEN-LAST:event_cbhospitalityActionPerformed
+
+    private void btnbackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnbackActionPerformed
+        // TODO add your handling code here:
+        tab.setEnabledAt(0, true);
+        tab.setEnabledAt(1, false);
+        tab.setSelectedIndex(0);
+    }//GEN-LAST:event_btnbackActionPerformed
+
+    private void ddyearpiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearpiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddyearpiActionPerformed
+
+    private void ddyearpeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearpeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddyearpeActionPerformed
+
+    private void cbpassportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpassportActionPerformed
+        // TODO add your handling code here:
+        passportpending();
+    }//GEN-LAST:event_cbpassportActionPerformed
+
+    private void cbpcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpcostActionPerformed
+        // TODO add your handling code here:
+        if (cbpcost.isSelected()){
+        txtpcost.setBackground(Color.YELLOW);
+        }else{
+        txtpcost.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_cbpcostActionPerformed
+
+    private void ddyearviActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearviActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddyearviActionPerformed
+
+    private void ddyearveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddyearveActionPerformed
+
+    private void cbvcostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbvcostActionPerformed
+        // TODO add your handling code here:
+        if (cbvcost.isSelected()){
+        txtvcost.setBackground(Color.YELLOW);
+        }else{
+        txtvcost.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_cbvcostActionPerformed
+
+    private void cbvisaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbvisaActionPerformed
+        // TODO add your handling code here:
+        visapending();
+    }//GEN-LAST:event_cbvisaActionPerformed
+
+    private void cbinsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbinsuranceActionPerformed
+        // TODO add your handling code here:
+        insurancepending();
+    }//GEN-LAST:event_cbinsuranceActionPerformed
+
+    private void cbicostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbicostActionPerformed
+        // TODO add your handling code here:
+        if (cbicost.isSelected()){
+        txticost.setBackground(Color.YELLOW);
+        }else{
+        txticost.setBackground(Color.white);
+        }
+    }//GEN-LAST:event_cbicostActionPerformed
+
+    private void btncancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btncancelActionPerformed
+
+    private void btnnextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnnextActionPerformed
+        // TODO add your handling code here:
+        if (updateinsurance() && updatevisa() && updatepassport()) {
+            tab.setEnabledAt(1, true);
+            tab.setEnabledAt(0, false);
+            tab.setSelectedIndex(1);
+        } else {
+            JOptionPane.showMessageDialog(this, "Some compulsory fields are not filled..!");
+        }
+    }//GEN-LAST:event_btnnextActionPerformed
+    public void passportpending() {
+        if (cbpassport.isSelected()) {
+            txtpassportno.setEditable(false);
+            txtpassissueplace.setEditable(false);
+            dddatepi.setEnabled(false);
+            ddmonthpi.setEnabled(false);
+            ddyearpi.setEnabled(false);
+            dddatepe.setEnabled(false);
+            ddmonthpe.setEnabled(false);
+            ddyearpe.setEnabled(false);
+            //txtpcost.setE(false);
+            cbpcost.setEnabled(false);
+        } else {
+            txtpassportno.setEditable(true);
+            txtpassissueplace.setEditable(true);
+            dddatepi.setEnabled(true);
+            ddmonthpi.setEnabled(true);
+            ddyearpi.setEnabled(true);
+            dddatepe.setEnabled(true);
+            ddmonthpe.setEnabled(true);
+            ddyearpe.setEnabled(true);
+            //txtpcost.setEditable(true);
+            cbpcost.setEnabled(true);
+        }
+    }
+
+    public void visapending() {
+        if (cbvisa.isSelected()) {
+            txtvisano.setEditable(false);
+            dddatevi.setEnabled(false);
+            ddmonthvi.setEnabled(false);
+            ddyearvi.setEnabled(false);
+            dddateve.setEnabled(false);
+            ddmonthve.setEnabled(false);
+            ddyearve.setEnabled(false);
+            //txtvcost.setEditable(false);
+            cbvcost.setEnabled(false);
+        } else {
+            txtvisano.setEditable(true);
+            dddatevi.setEnabled(true);
+            ddmonthvi.setEnabled(true);
+            ddyearvi.setEnabled(true);
+            dddateve.setEnabled(true);
+            ddmonthve.setEnabled(true);
+            ddyearve.setEnabled(true);
+            //txtvcost.setEditable(true);
+            cbvcost.setEnabled(true);
+        }
+    }
+
+    public void insurancepending() {
+        if (cbinsurance.isSelected()) {
+            txtinsurcmpnyname.setEditable(false);
+            txtinsurpolicy.setEditable(false);
+            //txticost.setEditable(false);
+            cbicost.setEnabled(false);
+        } else {
+            txtinsurcmpnyname.setEditable(true);
+            txtinsurpolicy.setEditable(true);
+            //txticost.setEditable(true);
+            cbicost.setEnabled(true);
+        }
+    }
+    customerdetails csdp = new customerdetails();
+    Tourtable ttc = new Tourtable();
+
+    public void updatepcost() {
+        if (cbpcost.isSelected()) {
+            ttc.setPassportcost(Integer.parseInt(txtpcost.getText()));
+        } else {
+            ttc.setPassportcost(0);
+        }
+    }
+
+    public void updatevcost() {
+        if (cbvcost.isSelected()) {
+            ttc.setVisacost(Integer.parseInt(txtvcost.getText()));
+        } else {
+            ttc.setVisacost(0);
+        }
+    }
+
+    public void updateicost() {
+        if (cbicost.isSelected()) {
+            ttc.setInsurancecost(Integer.parseInt(txticost.getText()));
+        } else {
+            ttc.setInsurancecost(0);
+        }
+    }
+
+    public void updateaircost() {
+        if (cbair.isSelected()) {
+            ttc.setAirticksetcost(Integer.parseInt(txtaircost.getText()));
+        } else {
+            ttc.setAirticksetcost(0);
+        }
+    }
+
+    public void updatehostcost() {
+        if (cbhospitality.isSelected()) {
+            ttc.setHospitalitycost(Integer.parseInt(txthospitalitycost.getText()));
+        } else {
+            ttc.setHospitalitycost(0);
+        }
+    }
+
+    public void updatetranscost() {
+        if (cbtransport.isSelected()) {
+            ttc.setTransportcost(Integer.parseInt(txttransportcost.getText()));
+        } else {
+            ttc.setTransportcost(0);
+        }
+    }
+
+    public boolean updatepassport() {
+        //customerdetails csd=new customerdetails();
+        if (cbpassport.isSelected()) {
+            return true;
+        } else if (!cbpassport.isSelected() && !txtpassportno.getText().isEmpty() && !txtpassissueplace.getText().isEmpty()) {
+            String pidate;
+            String pedate;
+            pidate = ddyearpi.getSelectedItem().toString() + ddmonthpi.getSelectedItem().toString() + dddatepi.getSelectedItem().toString();
+            pedate = ddyearpe.getSelectedItem().toString() + ddmonthpe.getSelectedItem().toString() + dddatepe.getSelectedItem().toString();
+            csdp.setPassportno(txtpassportno.getText());
+            csdp.setPassportissuedate(pidate);
+            csdp.setPassportissueplace(txtpassissueplace.getText());
+            csdp.setPassportexpdate(pedate);
+            updatepcost();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updatevisa() {
+        if (cbvisa.isSelected()) {
+            return true;
+        } else if (!cbvisa.isSelected() && !txtvisano.getText().isEmpty()) {
+            String vidate;
+            String vedate;
+            vidate = ddyearvi.getSelectedItem().toString() + ddmonthvi.getSelectedItem().toString() + dddatevi.getSelectedItem().toString();
+            vedate = ddyearve.getSelectedItem().toString() + ddmonthve.getSelectedItem().toString() + dddateve.getSelectedItem().toString();
+            ttc.setVisano(txtvisano.getText());
+            ttc.setVisaissuedate(vidate);
+            ttc.setVisaexpdate(vedate);
+            updatevcost();
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    public boolean updateinsurance() {
+        if (cbinsurance.isSelected()) {
+            return true;
+        } else if (!cbinsurance.isSelected() && !txtinsurcmpnyname.getText().isEmpty() && !txtinsurpolicy.getText().isEmpty()) {
+            ttc.setInsurancepolicyno(txtinsurpolicy.getText());
+            ttc.setInsurecmpny(txtinsurcmpnyname.getText());
+            updateicost();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+
+        //</editor-fold>
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    System.out.print("nmbs");
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Admin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new EditDocCostDetails().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnback;
+    private javax.swing.JButton btncancel;
+    private javax.swing.JButton btnnext;
+    private javax.swing.JButton btnsubmit;
+    private javax.swing.JCheckBox cbair;
+    private javax.swing.JCheckBox cbhospitality;
+    private javax.swing.JCheckBox cbicost;
+    private javax.swing.JCheckBox cbinsurance;
+    private javax.swing.JCheckBox cbpassport;
+    private javax.swing.JCheckBox cbpcost;
+    private javax.swing.JCheckBox cbtransport;
+    private javax.swing.JCheckBox cbvcost;
+    private javax.swing.JCheckBox cbvisa;
+    private javax.swing.JComboBox dddatepe;
+    private javax.swing.JComboBox dddatepi;
+    private javax.swing.JComboBox dddateve;
+    private javax.swing.JComboBox dddatevi;
+    private javax.swing.JComboBox ddmonthpe;
+    private javax.swing.JComboBox ddmonthpi;
+    private javax.swing.JComboBox ddmonthve;
+    private javax.swing.JComboBox ddmonthvi;
+    private javax.swing.JComboBox ddyearpe;
+    private javax.swing.JComboBox ddyearpi;
+    private javax.swing.JComboBox ddyearve;
+    private javax.swing.JComboBox ddyearvi;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
+    private javax.swing.JLabel jLabel38;
+    private javax.swing.JLabel jLabel39;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel40;
+    private javax.swing.JLabel jLabel41;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
+    private javax.swing.JLabel jLabel59;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel60;
+    private javax.swing.JLabel jLabel61;
+    private javax.swing.JLabel jLabel62;
+    private javax.swing.JLabel jLabel63;
+    private javax.swing.JLabel jLabel64;
+    private javax.swing.JLabel jLabel65;
+    private javax.swing.JLabel jLabel66;
+    private javax.swing.JLabel jLabel67;
+    private javax.swing.JLabel jLabel68;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
+    private javax.swing.JTabbedPane tab;
+    private javax.swing.JTextField txtaircost;
+    private javax.swing.JTextField txtcustid;
+    private javax.swing.JTextField txtdesignation;
+    private javax.swing.JTextField txthospitalitycost;
+    private javax.swing.JTextField txticost;
+    private javax.swing.JTextField txtinsurcmpnyname;
+    private javax.swing.JTextField txtinsurpolicy;
+    private javax.swing.JTextField txtname;
+    private javax.swing.JTextField txtnic;
+    private javax.swing.JTextField txtpassissueplace;
+    private javax.swing.JTextField txtpassportno;
+    private javax.swing.JTextField txtpcost;
+    private javax.swing.JTextField txtsurname;
+    private javax.swing.JTextField txttourid;
+    private javax.swing.JTextField txttransportcost;
+    private javax.swing.JTextField txtvcost;
+    private javax.swing.JTextField txtvisano;
+    // End of variables declaration//GEN-END:variables
+}
