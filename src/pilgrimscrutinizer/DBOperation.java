@@ -18,8 +18,8 @@ import javax.swing.JComboBox;
 //import Gui.Login;
 
 public class DBOperation {
-
-    String url = "jdbc:mysql://localhost:3306/psn";
+    //Selecting database
+    String url = "jdbc:mysql://localhost:3306/psf";
     String usernamel = "root";
     String passwordl = "";
     Connection con = null;
@@ -28,7 +28,7 @@ public class DBOperation {
     ResultSet lg = null;
 
     public int login(String username, String password) {
-        // TODO add your handling code here:
+        /* Handle login returning different int values according to user inputs*/
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String sql;        // TODO add your handling code here:
@@ -75,7 +75,7 @@ public class DBOperation {
         }
     }
 
-    public int checkUsername(String username) {
+    public int checkUsername(String username) {/* Checking for availability of username in database*/
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT Username FROM user";
@@ -106,7 +106,7 @@ public class DBOperation {
         }
     }
 
-    public boolean addNewUser(UserDetails ud) {
+    public boolean addNewUser(UserDetails ud) {/* Adding new user to database by userdetails class*/
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "INSERT INTO user VALUES(?,?,?,?,?,?,?,?)";
@@ -137,7 +137,7 @@ public class DBOperation {
         }
     }
 
-    public int checkNIC(String NIC) {
+    public int checkNIC(String NIC) {/* Checking NIC availability in database */
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT NIC FROM user";
@@ -168,7 +168,7 @@ public class DBOperation {
         }
     }
 
-    public UserDetails getUserDetails(String NIC) {
+    public UserDetails getUserDetails(String NIC) {/* Returning userdetails object for valid NIC*/
         UserDetails ud = new UserDetails();
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
@@ -194,12 +194,12 @@ public class DBOperation {
 
     }
 
-    public boolean editUser(UserDetails user, String Nic) {
+    public boolean editUser(UserDetails user, String Nic) {/* Updating User table in database*/
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query;
             //query = "UPDATE user SET Emptype='"+user.getEmployeeType()+"',Name='"+user.getName()+"', Address='"+user.getAddress()+"',Mobile="+user.getMobile()+",NIC='"+user.getNic()+"' WHERE NIC="+Nic;
-            String us = "user ";
+            //String us = "user ";
             query = "UPDATE user SET Emptype=? , Name=? , Address=? , Mobile=?  WHERE NIC=?";
 
             pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
@@ -524,7 +524,7 @@ public class DBOperation {
         try {
             String tablename = "tour" + tourid;
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
-            String query = "create table if not exists " + tablename + " (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, custId int(200), discount DECIMAL(6,3), introducedby int(200), tourid int(200)"
+            String query = "create table if not exists " + tablename + " (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY, custId int(200), discount float(200),broughtins int(200),introducedby varchar(200), tourid int(200)"
                     + ", visano varchar(50), visaissuedate varchar(20), visaexpdate varchar(20), insurecmpnyname varchar(100), insurepolno varchar(50), visacost int(200), insurecost int(200), "
                     + "hospitalitycost int(200), airticketcost int(200), transportcost int(200), passportcost int(200), finalamount DECIMAL(10,2), paidamount DECIMAL(10,2))";
             pst = (PreparedStatement) con.prepareStatement(query);
@@ -551,7 +551,7 @@ public class DBOperation {
 
     public boolean addcustomer(customerdetails c) {
         try {
-            java.util.Date utilDate = new SimpleDateFormat("yyyyMMMdd").parse(c.getDateofbirth());
+            java.util.Date utilDate = new SimpleDateFormat("yyyy-MM-dd").parse(c.getDateofbirth());
             java.sql.Date sqlDate = new java.sql.Date(utilDate.getTime());
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "INSERT INTO customer VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
@@ -899,8 +899,8 @@ public class DBOperation {
                 td.setMothernationality(rs.getString(27));
                 td.setSpousename(rs.getString(28));
                 td.setSpousenationality(rs.getString(29));
-                td.setInsurcmpny(rs.getString(30));
-                td.setInsurpolicyno(rs.getString(31));
+                //td.setInsurcmpny(rs.getString(30));
+                //td.setInsurpolicyno(rs.getString(31));
             }
             return td;
 
@@ -1079,9 +1079,10 @@ public class DBOperation {
 
     public boolean setpaymenttable(Paymentdetails pd) {
         try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date date = new java.util.Date();
-            String currentdate = dateFormat.format(date);
+            java.util.Date dt = new java.util.Date();
+            java.text.SimpleDateFormat sdf
+                    = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String currentTime = sdf.format(dt);
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "INSERT INTO payments VALUES(?,?,?,?,?,?)";
             pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
@@ -1090,7 +1091,7 @@ public class DBOperation {
             pst.setString(3, pd.getUsername());
             pst.setInt(4, pd.getTourId());
             pst.setDouble(5, pd.getAmount());
-            pst.setString(6, currentdate);
+            pst.setString(6, currentTime);
             pst.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -1234,11 +1235,8 @@ public int retTid(int cid) {
  //To change body of generated methods, choose Tools | Templates.
     }
 
-   
-//#Kemal
-    public int checkIntroducer(int customerid, int tourid) //Returns whether a person is already introduced by someone
-    {  
-        try {
+    public int checkIntroducer(int customerid, int tourid) {
+ try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT introducedby from tour"+tourid+" WHERE custid=?";
             pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
@@ -1246,13 +1244,14 @@ public int retTid(int cid) {
             rs = pst.executeQuery();
             
             int count = 0;
+            //int tid;
             while (rs.next()) {
             
             count=(rs.getInt("introducedby"));
-            
+            //count += 1;
             }
             return count;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("e");
             return (-1);
         } finally {
@@ -1269,9 +1268,8 @@ public int retTid(int cid) {
         }        
 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void updateIntroducer(int tourid, int custid, String nic)//Updates introducers NIC in the table 
-    {
+
+    public void updateIntroducer(int tourid, int custid, String nic) {
         try {
             
             
@@ -1311,63 +1309,8 @@ public int retTid(int cid) {
 
         //To change body of generated methods, choose Tools | Templates.
     }
-    public void deleteIntroducer(int tourid,int custid){
-    
-        try {
-            
-            
-            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
-            //String query = "UPDATE tour" + tourid + "SET visano=?,visaissuedate=?,visaexpdate=?,insurecmpnyname=?,insurepolno=?,visacost=?,insurecost=?,hospitalitycost=?,airticketcost=?,transportcost=?,passportcost=? WHERE custId=?";
-            
-            String query = "UPDATE tour" +tourid+ " SET introducedby=? WHERE custId=?";
-            //String query1 = "Select * from tour" +tourid+ " WHERE custId=?";
-            
-            
-            
-            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
-            //pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query1);
-            pst.setString(1, null);
-            //pst.setString(3, nic);
-            pst.setInt(2, custid);
-            //ResultSet r=pst.getResultSet();
-            //System.out.println(rs);
-            pst.executeUpdate();
-             
-//return true;
-        } catch (Exception e) {
-            System.err.println(e + "Updatett");
-            //return false;
-        } finally {
-            try {
-                if (pst != null) {
-                    pst.close();
-                }
-                if (con != null) {
-                    con.close();
-                }
-            } catch (Exception e) {
-              //  System.out.println(e);
-            }
-        }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    } 
-    
-    
-    
-    
-    
-    
-
-    public void updatetourtable2(int tourid, int ratio, int custid) //updates number of people introduced
-    {
+    public void updatetourtable2(int tourid, int ratio, int custid) {
 try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             //String query = "UPDATE tour" + tourid + "SET visano=?,visaissuedate=?,visaexpdate=?,insurecmpnyname=?,insurepolno=?,visacost=?,insurecost=?,hospitalitycost=?,airticketcost=?,transportcost=?,passportcost=? WHERE custId=?";
@@ -1406,8 +1349,43 @@ try {
 //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int retRatio(String tourname) //Returns the ratio of people declared for tour
-    {
+    public void updatetourtable1(int tourid, int disc, int custid) {
+        try {
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            //String query = "UPDATE tour" + tourid + "SET visano=?,visaissuedate=?,visaexpdate=?,insurecmpnyname=?,insurepolno=?,visacost=?,insurecost=?,hospitalitycost=?,airticketcost=?,transportcost=?,passportcost=? WHERE custId=?";
+            
+            String query = "UPDATE tour" +tourid+ " SET discount=? WHERE custId=?";
+            
+            
+            
+            
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setString(1, Integer.toString(disc));
+            
+            //pst.setString(3, nic);
+            pst.setInt(2, custid);
+            pst.executeUpdate();
+             
+//return true;
+        } catch (Exception e) {
+            System.err.println(e + "Updatett");
+            //return false;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+              //  System.out.println(e);
+            }
+        }
+ //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int retRatio(String tourname) {
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT * FROM tour";
@@ -1452,8 +1430,7 @@ try {
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int retPricePerCustomer(String tourname) //Returns the price for customer declared for tour
-    {
+    public int retPricePerCustomer(String tourname) {
          try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT * FROM tour";
@@ -1501,8 +1478,7 @@ try {
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int retCostPerCustomer(String tourname) //Returns the cost per customer declared for tour
-    {
+    public int retCostPerCustomer(String tourname) {
       try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT * FROM tour";
@@ -1550,8 +1526,7 @@ try {
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-    public int retBroughtins(int custid,int tourid)//Returns the current brought ins
-    {
+    public int retBroughtins(int custid,int tourid){
          try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             String query = "SELECT * FROM tour"+tourid;
@@ -1596,8 +1571,7 @@ try {
         } //To change body of generated methods, choose Tools | Templates.
     }
 
-    public float checkDiscountAvailability(String tourid,String custid) //Returns current discount
-    {
+    public int checkDiscountAvailability(String tourid,String custid) {
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
             //String tourid = null;
@@ -1616,14 +1590,15 @@ try {
                 String cmb2=tourid+" "+custid;
             //System.out.println(tourname);
             //System.out.println(cmb);
-                if( cmb1.equals(cmb2))
-                {
+                if( cmb1.equals(cmb2)){
             //System.out.println(tourname);
-                    float w=rs.getFloat("discount");
-                    return w;
-                }
+             int w=rs.getInt("discount");
+             //System.out.println(w); 
+             
+          return w;
+               }
                 
-         
+             return 0;
             }
             
             return 1;
@@ -1645,7 +1620,615 @@ try {
 
         } //To change body of generated methods, choose Tools | Templates.
     }
+   public ArrayList<Paymentdetails> getdailypayments() {
+        ArrayList<Paymentdetails> plist = new ArrayList<Paymentdetails>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date date = new java.util.Date();
+        String currentdate = dateFormat.format(date);
+        try {
+                con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+                String query = "SELECT * from payments WHERE date(paymentdate)=?";
+                pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+                pst.setString(1, currentdate);
+                rs = pst.executeQuery();
+                while (rs.next()) {
+                    Paymentdetails td = new Paymentdetails();
+                    td.setPaymentId(rs.getInt(1));
+                    td.setCustId(rs.getInt(2));
+                    td.setUsername(rs.getString(3));
+                    td.setTourId(rs.getInt(4));
+                    td.setAmount(rs.getDouble(5));
+                    td.setDate(rs.getString(6));
+                    plist.add(td);
+                }
 
+            
+        } catch (Exception e) {
+            return null;
+        }
+        return plist;
+    }
+   
+   
+   public ArrayList<viewregularstaffpayments> retdailypaymentsofreguser(String username, String currdate) {
+        try {
+            ArrayList<viewregularstaffpayments> vp = new ArrayList<viewregularstaffpayments>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select payments.tourid, tour.tourname, payments.customerid, customer.surname, payments.amount "
+                    + "from payments join tour on payments.tourid=tour.tourid join customer on"
+                    + " payments.customerid=customer.customerid where date(paymentdate)=? and payments.username=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setString(2, username);
+            pst.setString(1, currdate);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                viewregularstaffpayments vrsp = new viewregularstaffpayments();
+                vrsp.setTourid(rs.getInt(1));
+                vrsp.setTourname(rs.getString(2));
+                vrsp.setCustid(rs.getInt(3));
+                vrsp.setCustname(rs.getString(4));
+                vrsp.setAmount(rs.getDouble(5));
+                vp.add(vrsp);
+
+            }
+            return vp;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Userpaymentdetails> getuserbypayments(String currdate) {
+        try {
+            ArrayList<Userpaymentdetails> ud = new ArrayList<Userpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "SELECT  user.Empid, user.Username, user.Emptype, date(payments.paymentdate), payments.paymentId, payments.amount from user"
+                    + " join payments on payments.username=user.Username where date(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setString(1, currdate);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Userpaymentdetails ud1 = new Userpaymentdetails();
+                ud1.setEmpID(rs.getInt(1));
+                ud1.setUsername(rs.getString(2));
+                ud1.setEmployeeType(rs.getString(3));
+                ud1.setPaymentdate(rs.getString(4));
+                ud1.setPaymentId(rs.getInt(5));
+                ud1.setAmount(rs.getDouble(6));
+                ud.add(ud1);
+
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Customerpaymentdetails> paymentsbycustomer(String time) {
+        try {
+            ArrayList<Customerpaymentdetails> ud = new ArrayList<Customerpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select customer.customerid, customer.initials, customer.surname, customer.nic, payments.tourid,"
+                    + "tour.tourname,payments.paymentid, payments.amount, date(payments.paymentdate) from payments join user on "
+                    + "payments.username=user.Username join customer on payments.customerId=customer.customerid join tour on"
+                    + " payments.tourId=tour.tourid where date(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setString(1, time);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Customerpaymentdetails cp = new Customerpaymentdetails();
+                cp.setCustid(rs.getInt(1));
+                cp.setInitials(rs.getString(2));
+                cp.setSurname(rs.getString(3));
+                cp.setNic(rs.getString(4));
+                cp.setTourid(rs.getInt(5));
+                cp.setTourname(rs.getString(6));
+                cp.setPaymentid(rs.getInt(7));
+                cp.setAmount(rs.getInt(8));
+                cp.setPaymentdate(rs.getString(9));
+                ud.add(cp);
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Tourpaymentdetails> paymentbytour(String time) {
+        try {
+
+            ArrayList<Tourpaymentdetails> tpd = new ArrayList<Tourpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select tour.tourid, tour.tourname, tour.destination, payments.username, payments.paymentid, payments.amount "
+                    + "from payments join tour on payments.tourid=tour.tourid where date(paymentdate)=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setString(1, time);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Tourpaymentdetails tp = new Tourpaymentdetails();
+                tp.setTourid(rs.getInt(1));
+                tp.setTourname(rs.getString(2));
+                tp.setDestination(rs.getString(3));
+                tp.setUsername(rs.getString(4));
+                tp.setPaymentid(rs.getInt(5));
+                tp.setAmount(rs.getDouble(6));
+                tpd.add(tp);
+
+            }
+            return tpd;
+
+        } catch (Exception e) {
+
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public ArrayList<Tourpaymentdetails> paymentbytourthisyear(int year) {
+        try {
+
+            ArrayList<Tourpaymentdetails> tpd = new ArrayList<Tourpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select tour.tourid, tour.tourname, tour.destination, payments.username, payments.paymentid, payments.amount "
+                    + "from payments join tour on payments.tourid=tour.tourid where YEAR(paymentdate)=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Tourpaymentdetails tp = new Tourpaymentdetails();
+                tp.setTourid(rs.getInt(1));
+                tp.setTourname(rs.getString(2));
+                tp.setDestination(rs.getString(3));
+                tp.setUsername(rs.getString(4));
+                tp.setPaymentid(rs.getInt(5));
+                tp.setAmount(rs.getDouble(6));
+                tpd.add(tp);
+
+            }
+            return tpd;
+
+        } catch (Exception e) {
+
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public ArrayList<Customerpaymentdetails> paymentsbycustomerthisyear(int year) {
+        try {
+            ArrayList<Customerpaymentdetails> ud = new ArrayList<Customerpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select customer.customerid, customer.initials, customer.surname, customer.nic, payments.tourid,"
+                    + "tour.tourname,payments.paymentid, payments.amount, date(payments.paymentdate) from payments join user on "
+                    + "payments.username=user.Username join customer on payments.customerId=customer.customerid join tour on"
+                    + " payments.tourId=tour.tourid where YEAR(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Customerpaymentdetails cp = new Customerpaymentdetails();
+                cp.setCustid(rs.getInt(1));
+                cp.setInitials(rs.getString(2));
+                cp.setSurname(rs.getString(3));
+                cp.setNic(rs.getString(4));
+                cp.setTourid(rs.getInt(5));
+                cp.setTourname(rs.getString(6));
+                cp.setPaymentid(rs.getInt(7));
+                cp.setAmount(rs.getInt(8));
+                cp.setPaymentdate(rs.getString(9));
+                ud.add(cp);
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Userpaymentdetails> getuserbypaymentsthisyear(int year) {
+        try {
+            ArrayList<Userpaymentdetails> ud = new ArrayList<Userpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "SELECT  user.Empid, user.Username, user.Emptype, date(payments.paymentdate), payments.paymentId, payments.amount from user"
+                    + " join payments on payments.username=user.Username where YEAR(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Userpaymentdetails ud1 = new Userpaymentdetails();
+                ud1.setEmpID(rs.getInt(1));
+                ud1.setUsername(rs.getString(2));
+                ud1.setEmployeeType(rs.getString(3));
+                ud1.setPaymentdate(rs.getString(4));
+                ud1.setPaymentId(rs.getInt(5));
+                ud1.setAmount(rs.getDouble(6));
+                ud.add(ud1);
+
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Userpaymentdetails> getuserbypaymentsthismonth(int year, int month) {
+        try {
+            ArrayList<Userpaymentdetails> ud = new ArrayList<Userpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "SELECT  user.Empid, user.Username, user.Emptype, date(payments.paymentdate), payments.paymentId, payments.amount from user"
+                    + " join payments on payments.username=user.Username where YEAR(paymentdate)=? and MONTH(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, month);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Userpaymentdetails ud1 = new Userpaymentdetails();
+                ud1.setEmpID(rs.getInt(1));
+                ud1.setUsername(rs.getString(2));
+                ud1.setEmployeeType(rs.getString(3));
+                ud1.setPaymentdate(rs.getString(4));
+                ud1.setPaymentId(rs.getInt(5));
+                ud1.setAmount(rs.getDouble(6));
+                ud.add(ud1);
+
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Customerpaymentdetails> paymentsbycustomerthisyearthismonth(int year, int month) {
+        try {
+            ArrayList<Customerpaymentdetails> ud = new ArrayList<Customerpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select customer.customerid, customer.initials, customer.surname, customer.nic, payments.tourid,"
+                    + "tour.tourname,payments.paymentid, payments.amount, date(payments.paymentdate) from payments join user on "
+                    + "payments.username=user.Username join customer on payments.customerId=customer.customerid join tour on"
+                    + " payments.tourId=tour.tourid where YEAR(paymentdate)=? and MONTH(paymentdate)=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, month);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Customerpaymentdetails cp = new Customerpaymentdetails();
+                cp.setCustid(rs.getInt(1));
+                cp.setInitials(rs.getString(2));
+                cp.setSurname(rs.getString(3));
+                cp.setNic(rs.getString(4));
+                cp.setTourid(rs.getInt(5));
+                cp.setTourname(rs.getString(6));
+                cp.setPaymentid(rs.getInt(7));
+                cp.setAmount(rs.getInt(8));
+                cp.setPaymentdate(rs.getString(9));
+                ud.add(cp);
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Tourpaymentdetails> paymentbytourthisyearthismonth(int year, int month) {
+        try {
+
+            ArrayList<Tourpaymentdetails> tpd = new ArrayList<Tourpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select tour.tourid, tour.tourname, tour.destination, payments.username, payments.paymentid, payments.amount "
+                    + "from payments join tour on payments.tourid=tour.tourid where YEAR(paymentdate)=? and MONTH(paymentdate)=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, month);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Tourpaymentdetails tp = new Tourpaymentdetails();
+                tp.setTourid(rs.getInt(1));
+                tp.setTourname(rs.getString(2));
+                tp.setDestination(rs.getString(3));
+                tp.setUsername(rs.getString(4));
+                tp.setPaymentid(rs.getInt(5));
+                tp.setAmount(rs.getDouble(6));
+                tpd.add(tp);
+
+            }
+            return tpd;
+
+        } catch (Exception e) {
+
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public ArrayList<Userpaymentdetails> getuserbypaymentsthisweek(int year, int week) {
+        try {
+            ArrayList<Userpaymentdetails> ud = new ArrayList<Userpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "SELECT  user.Empid, user.Username, user.Emptype, date(payments.paymentdate), payments.paymentId, payments.amount from user"
+                    + " join payments on payments.username=user.Username where YEAR(paymentdate)=? and WEEKOFYEAR(date(`paymentdate`))=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, week);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Userpaymentdetails ud1 = new Userpaymentdetails();
+                ud1.setEmpID(rs.getInt(1));
+                ud1.setUsername(rs.getString(2));
+                ud1.setEmployeeType(rs.getString(3));
+                ud1.setPaymentdate(rs.getString(4));
+                ud1.setPaymentId(rs.getInt(5));
+                ud1.setAmount(rs.getDouble(6));
+                ud.add(ud1);
+
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public ArrayList<Tourpaymentdetails> paymentbytourthisyearthisweek(int year, int week) {
+        try {
+
+            ArrayList<Tourpaymentdetails> tpd = new ArrayList<Tourpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select tour.tourid, tour.tourname, tour.destination, payments.username, payments.paymentid, payments.amount "
+                    + "from payments join tour on payments.tourid=tour.tourid where YEAR(paymentdate)=? and WEEKOFYEAR(date(`paymentdate`))=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, week);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Tourpaymentdetails tp = new Tourpaymentdetails();
+                tp.setTourid(rs.getInt(1));
+                tp.setTourname(rs.getString(2));
+                tp.setDestination(rs.getString(3));
+                tp.setUsername(rs.getString(4));
+                tp.setPaymentid(rs.getInt(5));
+                tp.setAmount(rs.getDouble(6));
+                tpd.add(tp);
+
+            }
+            return tpd;
+
+        } catch (Exception e) {
+
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+    }
+
+    public ArrayList<Customerpaymentdetails> paymentsbycustomerthisyearthisweek(int year, int week) {
+        try {
+            ArrayList<Customerpaymentdetails> ud = new ArrayList<Customerpaymentdetails>();
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select customer.customerid, customer.initials, customer.surname, customer.nic, payments.tourid,"
+                    + "tour.tourname,payments.paymentid, payments.amount, date(payments.paymentdate) from payments join user on "
+                    + "payments.username=user.Username join customer on payments.customerId=customer.customerid join tour on"
+                    + " payments.tourId=tour.tourid where YEAR(paymentdate)=? and WEEKOFYEAR(date(`paymentdate`))=?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, year);
+            pst.setInt(2, week);
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                Customerpaymentdetails cp = new Customerpaymentdetails();
+                cp.setCustid(rs.getInt(1));
+                cp.setInitials(rs.getString(2));
+                cp.setSurname(rs.getString(3));
+                cp.setNic(rs.getString(4));
+                cp.setTourid(rs.getInt(5));
+                cp.setTourname(rs.getString(6));
+                cp.setPaymentid(rs.getInt(7));
+                cp.setAmount(rs.getFloat(8));
+                cp.setPaymentdate(rs.getString(9));
+                ud.add(cp);
+            }
+            return ud;
+
+        } catch (Exception e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
+
+    }
+
+    public Viewmorepaymentdetails viewmorepay(int paymentid) {
+        try {
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "select customer.initials, customer.surname, customer.nic, tour.tourname, date(payments.paymentdate), "
+                    + "time(payments.paymentdate), payments.amount, payments.username from payments join user on "
+                    + "payments.username=user.Username join customer on payments.customerId=customer.customerid join tour on"
+                    + " payments.tourId=tour.tourid where payments.paymentId=? ";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            pst.setInt(1, paymentid);
+            rs = pst.executeQuery();
+            Viewmorepaymentdetails v = new Viewmorepaymentdetails();
+
+            while (rs.next()) {
+                v.setInitials(rs.getString(1));
+                v.setCustomername(rs.getString(2));
+                v.setCustnic(rs.getString(3));
+                v.setTourname(rs.getString(4));
+                v.setDate(rs.getString(5));
+                v.setTime(rs.getString(6));
+                v.setAmount(rs.getDouble(7));
+                v.setUsername(rs.getString(8));
+                               
+
+            }
+            return v;
+
+        } catch (Exception e) {
+            System.out.print("err");
+            return null;
+        }
+
+    }
+//#kemal-For Discount/Edit Customer-------------------------------------------------------------------------------------------
+      
+    
     public void updatetourtable1(int tourid, float disc, int custid,int finalprice)//updates discount and final amount to pay 
     {
         try {
@@ -1681,24 +2264,32 @@ try {
         }
  //To change body of generated methods, choose Tools | Templates.
     }
-//#Nimali
-    public String CustomerPassPortID(String passportno) {
-         try {
+        public void deleteIntroducer(int tourid,int custid){
+    
+        try {
+            
+            
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
-            String query = "SELECT customerid,passportno FROM customer";
+            //String query = "UPDATE tour" + tourid + "SET visano=?,visaissuedate=?,visaexpdate=?,insurecmpnyname=?,insurepolno=?,visacost=?,insurecost=?,hospitalitycost=?,airticketcost=?,transportcost=?,passportcost=? WHERE custId=?";
+            
+            String query = "UPDATE tour" +tourid+ " SET introducedby=? WHERE custId=?";
+            //String query1 = "Select * from tour" +tourid+ " WHERE custId=?";
+            
+            
+            
             pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
-            rs = pst.executeQuery();
-            while (rs.next()) {
-                if (!passportno.equals(rs.getString(2))) {
-                } else {
-                    return rs.getString(1);
-                }
-            }
-            return "A";
+            //pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query1);
+            pst.setString(1, null);
+            //pst.setString(3, nic);
+            pst.setInt(2, custid);
+            //ResultSet r=pst.getResultSet();
+            //System.out.println(rs);
+            pst.executeUpdate();
+             
 
         } catch (Exception e) {
-            //System.out.print(e);
-            return "B";
+            System.err.println(e + "Updatett");
+            //return false;
         } finally {
             try {
                 if (pst != null) {
@@ -1708,30 +2299,37 @@ try {
                     con.close();
                 }
             } catch (Exception e) {
-            
-
+              //  System.out.println(e);
+            }
         }
-    }
-//To change body of generated methods, choose Tools | Templates.
-    }
+        }
 
-    public String CustomerNIC(String nic) {
+
+    public ArrayList<TourTableDetails> getCustomers(int tourid) {
+        ArrayList<TourTableDetails> clist = new ArrayList<TourTableDetails>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        java.util.Date date = new java.util.Date();
+        String currentdate = dateFormat.format(date);
+
         try {
             con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
-            String query = "SELECT customerid,NIC FROM customer";
+            String query = "SELECT * from tour"+tourid+" WHERE discount>0";  
+    //String query = "SELECT * from tour WHERE tourdate>?";
             pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            
             rs = pst.executeQuery();
             while (rs.next()) {
-                if (!nic.equals(rs.getString(2))) {
-                } else {
-                    return rs.getString(1);
-                }
+                TourTableDetails ttd = new TourTableDetails();
+                ttd.setCustid(rs.getInt(2));
+                ttd.setDiscount(rs.getInt(3));
+                ttd.setBroughtins(rs.getInt(4));
+		clist.add(ttd);
             }
-            return "A";
-
+            return clist;
         } catch (Exception e) {
-            //System.out.print(e);
-            return "B";
+            //System.out.println(e);
+            return null;
         } finally {
             try {
                 if (pst != null) {
@@ -1741,9 +2339,88 @@ try {
                     con.close();
                 }
             } catch (Exception e) {
+                //System.out.println(e);
+            }
+        } //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public ArrayList<customerdetails> getCustomerName(int tid) {
+        ArrayList<customerdetails> clist1 = new ArrayList<customerdetails>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //get current date time with Date()
+        java.util.Date date = new java.util.Date();
+        String currentdate = dateFormat.format(date);
+
+        try {
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+    String query = "SELECT * from customer ";  
+    //String query = "SELECT * from tour WHERE tourdate>?";
+            pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
             
+            rs = pst.executeQuery();
+            while (rs.next()) {
+                customerdetails cd = new customerdetails();
+                cd.setName(rs.getString(2));
+                
+		clist1.add(cd);
+            }
+            return clist1;
+        } catch (Exception e) {
+            //System.out.println(e);
+            return null;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                //System.out.println(e);
+            }
+        } //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int retRegisteredTours(int cid) {
+               try {
+            con = (Connection) DriverManager.getConnection(url, this.usernamel, this.passwordl);
+            String query = "SELECT * FROM maptour";
+            //pst = (com.mysql.jdbc.PreparedStatement) con.prepareStatement(query);
+            Statement stmt = con.createStatement(
+                    ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_READ_ONLY);
+            rs =stmt.executeQuery(query);
+            int count=0;
+            while (rs.next()) {
+           
+            int icid=Integer.parseInt(rs.getString("customerid"));
+                
+            if(icid==cid){
+                count++;
+                }
+                            
+               }
+            
+           return count;
+        }       catch (Exception e) {
+            //System.out.print(e);
+            return 0;
+        } finally {
+            try {
+                if (pst != null) {
+                    pst.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+       
+            
+            }
 
         }
-    } //To change body of generated methods, choose Tools | Templates.
+ //To change body of generated methods, choose Tools | Templates.
     }
+
 }

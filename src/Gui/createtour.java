@@ -30,12 +30,7 @@ public class createtour extends javax.swing.JFrame {
      * Creates new form createtour
      */
     public createtour() {
-        /*try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-
-        }*/
-        initComponents();
+                initComponents();
     }
             
   

@@ -346,16 +346,11 @@ public class UpdateCustomerDetails extends javax.swing.JFrame {
 
     private void btnEditPersonalDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditPersonalDetailsActionPerformed
         // TODO add your handling code here:
-       
         EditPersonnalDetails epd = new EditPersonnalDetails();
         epd.setfields(csd);
         this.dispose();
         epd.setVisible(true);
         epd.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        
-        
-        
-        
     }//GEN-LAST:event_btnEditPersonalDetailsActionPerformed
 
     private void btnEditCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCostActionPerformed
@@ -389,8 +384,6 @@ public class UpdateCustomerDetails extends javax.swing.JFrame {
 
     private void btnEditDiscountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDiscountActionPerformed
         // TODO add your handling code here:
-        try
-        {
         EditCustomer ec1 = new EditCustomer();
         tourdetails td = tlist.get(tblupdatetour.getSelectedRow());
         //Discount ec1 = new Discount();
@@ -399,10 +392,7 @@ public class UpdateCustomerDetails extends javax.swing.JFrame {
         ec1.loadTourDetails(td,csd);
         
         ec1.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        }
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(this, " Please select a tour...! ");
-        }
+       
     }//GEN-LAST:event_btnEditDiscountActionPerformed
 
     private void btnAddtoNewTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoNewTourActionPerformed

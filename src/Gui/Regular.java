@@ -13,9 +13,23 @@ import javax.swing.JOptionPane;
  */
 public class Regular extends javax.swing.JFrame {
 
+    /**
+     * @return the userType
+     */
+    public static String getUserType() {
+        return userType;
+    }
+
+    /**
+     * @param aUserType the userType to set
+     */
+    public static void setUserType(String aUserType) {
+        userType = aUserType;
+    }
+
     private String user;
     private String password;
-    public static String userType;
+    private static String userType;
 
     /**
      * Creates new form Regular
@@ -264,10 +278,16 @@ public class Regular extends javax.swing.JFrame {
 
     private void btnPaymentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentsActionPerformed
         // TODO add your handling code here:
-        Searchforpay sfp=new Searchforpay();
+        
+        /*Searchforpay sfp=new Searchforpay();
         sfp.setUser(user);
         sfp.setVisible(true);
-        sfp.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        sfp.setDefaultCloseOperation(HIDE_ON_CLOSE);*/
+        Payment p=new Payment();
+        p.setVisible(true);
+        p.setUser(user);
+        p.setUserType(userType);
+        p.setDefaultCloseOperation(HIDE_ON_CLOSE);
         
     }//GEN-LAST:event_btnPaymentsActionPerformed
 

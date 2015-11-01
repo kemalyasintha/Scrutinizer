@@ -65,11 +65,14 @@ public class AddPayment extends javax.swing.JFrame {
                     paneloustd.setVisible(true);
                     txtrecived.setText(Double.toString(total));
                     setnewoutsd();
+                    }else{
+                    JOptionPane.showMessageDialog(this, "Recived amount is grater than outstanding amount..!");
                     }
                 } else {
                     paneloustd.setVisible(false);
                     txtrecived.setBackground(Color.WHITE);
                     txtrecived.setText(Double.toString(total));
+                    //JOptionPane.showMessageDialog(this,"Please enter valid amount..!");
                 }
             } catch (NumberFormatException nbx) {
             }
@@ -571,7 +574,7 @@ public class AddPayment extends javax.swing.JFrame {
         Tourtable tt = new Tourtable();
         try {
             Double amount = Double.parseDouble(txtpamount.getText());
-            Double confirm = Double.parseDouble(txtconfirm.getText());
+            Double confirm = Double.parseDouble(txtrecived.getText());
             //Double recieve = Double.parseDouble(txtrecived.getText());
             pd.setCustId(Integer.parseInt(txtcustid.getText()));
             pd.setTourId(Integer.parseInt(txtTourId.getText()));

@@ -102,7 +102,7 @@ public class customer extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,7 +111,7 @@ public class customer extends javax.swing.JFrame {
     DBOperation d = new DBOperation();
     private void btnaddcustActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddcustActionPerformed
         // TODO add your handling code here:
-        addcustomer1 adc = new addcustomer1();
+        Addcustomer11 adc = new Addcustomer11();
         adc.setVisible(true);
         adc.setDefaultCloseOperation(HIDE_ON_CLOSE);
         this.dispose();

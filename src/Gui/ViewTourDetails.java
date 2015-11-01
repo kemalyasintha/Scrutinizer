@@ -84,8 +84,6 @@ public class ViewTourDetails extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLayeredPane1 = new javax.swing.JLayeredPane();
-        jScrollPane2 = new javax.swing.JScrollPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -138,20 +136,7 @@ public class ViewTourDetails extends javax.swing.JFrame {
         txtTourId = new javax.swing.JTextField();
         jLabel23 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
-        jLayeredPane1.setLayout(jLayeredPane1Layout);
-        jLayeredPane1Layout.setHorizontalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jLayeredPane1Layout.setVerticalGroup(
-            jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jScrollPane2.setBackground(new java.awt.Color(153, 153, 153));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("View Tour Details"));
@@ -537,34 +522,81 @@ public class ViewTourDetails extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jPanel1);
 
-        jScrollPane2.setViewportView(jScrollPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 955, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(13, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(268, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ddyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ddyearActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here
+        this.dispose();
+
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnEditTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTourActionPerformed
+
+        //btnEditTour.setText("Save Changes");
+        /*txtinsurcst.setEditable(true);
+        txtairtktcost.setEditable(true);
+        txtdestination.setEditable(true);
+        txtestmdtotalcost.setEditable(true);
+        txthospitcst.setEditable(true);
+        txtnoofdays.setEditable(true);
+        txtnoofpassengers.setEditable(true);
+        txtpassprtcost.setEditable(true);
+        txtpricepercustomer.setEditable(true);
+        txtprofmargin.setEditable(true);
+        txttourname.setEditable(true);
+        txttranscost.setEditable(true);
+        txtvisacst.setEditable(true);
+        cbdiscountallowed.setEnabled(true);
+        cbdiscountallowedcheck();
+        cbpercentagecheck();
+        cbratiocheck();
+        btnEditTour.setVisible(false);*/
+        EditTourDetails etd=new EditTourDetails();
+        etd.setVisible(true);
+        etd.setfields(td1);
+        etd.cbdiscountallowedcheck();
+        etd.setDefaultCloseOperation(HIDE_ON_CLOSE);
+        this.dispose();
+
+    }//GEN-LAST:event_btnEditTourActionPerformed
+
+    private void cbpercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpercentageActionPerformed
+        // TODO add your handling code here:
+        cbpercentagecheck();
+    }//GEN-LAST:event_cbpercentageActionPerformed
+
+    private void cbratioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbratioActionPerformed
+        // TODO add your handling code here:
+        cbratiocheck();
+    }//GEN-LAST:event_cbratioActionPerformed
 
     private void cbdiscountallowedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbdiscountallowedActionPerformed
         // TODO add your handling code here:
         cbdiscountallowedcheck();
-
     }//GEN-LAST:event_cbdiscountallowedActionPerformed
+
 
     public void cbratiocheck() {
         if (cbratio.isSelected()) {
@@ -608,61 +640,6 @@ public class ViewTourDetails extends javax.swing.JFrame {
 
         }
     }
-    private void cbratioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbratioActionPerformed
-        // TODO add your handling code here:
-        cbratiocheck();
-
-    }//GEN-LAST:event_cbratioActionPerformed
-
-    private void cbpercentageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbpercentageActionPerformed
-        // TODO add your handling code here:
-        cbpercentagecheck();
-
-    }//GEN-LAST:event_cbpercentageActionPerformed
-
-    private void btnEditTourActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTourActionPerformed
-
-        //btnEditTour.setText("Save Changes");
-        /*txtinsurcst.setEditable(true);
-        txtairtktcost.setEditable(true);
-        txtdestination.setEditable(true);
-        txtestmdtotalcost.setEditable(true);
-        txthospitcst.setEditable(true);
-        txtnoofdays.setEditable(true);
-        txtnoofpassengers.setEditable(true);
-        txtpassprtcost.setEditable(true);
-        txtpricepercustomer.setEditable(true);
-        txtprofmargin.setEditable(true);
-        txttourname.setEditable(true);
-        txttranscost.setEditable(true);
-        txtvisacst.setEditable(true);
-        cbdiscountallowed.setEnabled(true);
-        cbdiscountallowedcheck();
-        cbpercentagecheck();
-        cbratiocheck();
-        btnEditTour.setVisible(false);*/
-        EditTourDetails etd=new EditTourDetails();
-        etd.setVisible(true);
-        etd.setfields(td1);
-        etd.cbdiscountallowedcheck();
-        etd.setDefaultCloseOperation(HIDE_ON_CLOSE);
-        this.dispose();
-        
-
-
-    }//GEN-LAST:event_btnEditTourActionPerformed
-
-    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
-        // TODO add your handling code here       
-        this.dispose();
-
-
-    }//GEN-LAST:event_btnCancelActionPerformed
-
-    private void ddyearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ddyearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ddyearActionPerformed
-
     public boolean checkfields() {
         if (txtairtktcost.getText().isEmpty() | txtdestination.getText().isEmpty() | txtestmdtotalcost.getText().isEmpty() | txthospitcst.getText().isEmpty() | txtnoofdays.getText().isEmpty() | txtnoofpassengers.getText().isEmpty() | txtpassprtcost.getText().isEmpty()
                 | txtpricepercustomer.getText().isEmpty() | txttourname.getText().isEmpty() | txttranscost.getText().isEmpty() | txtvisacst.getText().isEmpty()) {
@@ -758,10 +735,8 @@ public class ViewTourDetails extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSpinner spnratio;
     private javax.swing.JTextField txt3rdtimedisc;
     private javax.swing.JTextField txt4thabovedisc;
